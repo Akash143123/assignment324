@@ -14,7 +14,95 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      campaigns: {
+        Row: {
+          body: string
+          created_at: string
+          delay_seconds: number
+          hourly_limit: number
+          id: string
+          sender: string
+          start_at: string
+          subject: string
+          total_recipients: number
+          user_id: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          delay_seconds?: number
+          hourly_limit?: number
+          id?: string
+          sender?: string
+          start_at?: string
+          subject: string
+          total_recipients?: number
+          user_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          delay_seconds?: number
+          hourly_limit?: number
+          id?: string
+          sender?: string
+          start_at?: string
+          subject?: string
+          total_recipients?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      email_jobs: {
+        Row: {
+          campaign_id: string
+          created_at: string
+          error: string | null
+          id: string
+          preview_url: string | null
+          recipient: string
+          scheduled_at: string
+          sent_at: string | null
+          status: string
+          subject: string
+          user_id: string
+        }
+        Insert: {
+          campaign_id: string
+          created_at?: string
+          error?: string | null
+          id?: string
+          preview_url?: string | null
+          recipient: string
+          scheduled_at: string
+          sent_at?: string | null
+          status?: string
+          subject: string
+          user_id: string
+        }
+        Update: {
+          campaign_id?: string
+          created_at?: string
+          error?: string | null
+          id?: string
+          preview_url?: string | null
+          recipient?: string
+          scheduled_at?: string
+          sent_at?: string | null
+          status?: string
+          subject?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "email_jobs_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
